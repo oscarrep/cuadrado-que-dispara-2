@@ -1,6 +1,10 @@
-#include<stdio.h>
+#include "SDL/include/SDL.h"
 
-int main()
+#pragma comment(lib, "SDL/libx86/SDL2.lib")
+#pragma comment(lib, "SDL/libx86/SDL2main.lib")
+
+
+int main(int argc, char* argv[])
 {
-	printf("hello");
+	return 0;
 }
