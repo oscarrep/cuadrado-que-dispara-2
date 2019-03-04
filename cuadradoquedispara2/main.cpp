@@ -22,15 +22,12 @@ int main(int argc, char* argv[])
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(win, 0, 0);
 
+	
 	SDL_Rect rect = { 100,100,100,100 };
-	while (loop)
-	{
-		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-		SDL_RenderClear(renderer);
 
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(renderer, &rect);
-		SDL_RenderPresent(renderer);
+	while (loop)
+	{	//				  {pos.x,pos.y,w,h}
+		SDL_Rect bullet = { rect.x+50,rect.y+50, 10, 10 };
 
 		if (SDL_PollEvent(&event) != 0) {
 			switch (event.type)
@@ -43,12 +40,12 @@ int main(int argc, char* argv[])
 					}
 					break;
 				case SDLK_DOWN:
-					if (rect.y < 720 - rect.h) {
+					if (rect.y < 800 - rect.h) {
 						rect.y += 20;
 					}
 					break;
 				case SDLK_RIGHT:
-					if (rect.x < (720 - rect.w)) {
+					if (rect.x < (850 - rect.w)) {
 						rect.x += 20;
 					}
 					break;
@@ -60,10 +57,25 @@ int main(int argc, char* argv[])
 				case SDLK_ESCAPE:
 					loop = false;
 					break;
+				case SDLK_SPACE:
+					bullet.x += 20;
+					break;
 				}
 			}
 		}
+
+		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+		SDL_RenderClear(renderer);
+
+		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+		SDL_RenderFillRect(renderer, &rect);
+		SDL_RenderPresent(renderer);
+
+		SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
+		SDL_RenderFillRect(renderer, &bullet);
+		SDL_RenderPresent(renderer);
 	}
+
 
 	SDL_Quit();
 	return 0;
